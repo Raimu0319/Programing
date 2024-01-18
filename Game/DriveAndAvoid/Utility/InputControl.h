@@ -17,11 +17,11 @@ public:
 	//ボタン入力取得処理
 	static bool GetButton(int button);			//押し続けている間
 	static bool GetButtonDown(int button); //押した瞬間
-	static bool GetbutoonUp(int button);   //離した瞬間
+	static bool GetButtonUp(int button);   //離した瞬間
 
 	//トリガー入力取得処理
 	static float GetLeftTrigger();				//左トリガー
-	static float GetRightTrigegr();				//右トリガー
+	static float GetRightTrigger();				//右トリガー
 
 	//スティック入力取得処理
 	static Vector2D GetLeftStick();				//左スティック
