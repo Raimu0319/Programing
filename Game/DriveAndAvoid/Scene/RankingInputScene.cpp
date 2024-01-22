@@ -17,7 +17,7 @@ RankingInputScene::~RankingInputScene()
 }
 
 //初期化処理
-void background_image::Initialize()
+void RankingInputScene::Initialize()
 {
 	//画像の読み込み
 	background_image = LoadGraph("Resource/images/Ranking.bmp");
@@ -29,13 +29,13 @@ void background_image::Initialize()
 	}
 
 	//メモリの動的確保
-	ranking = new Rankingdata;
+	ranking = new RankingData;
 	ranking->Initialize();
 
 	//リザルトデータを取得する
 	FILE* fp = nullptr;
 	//ファイルオープン
-	errno_t result = fopen(&fp, "Resource/dat/result_data.csv", "r");
+	errno_t result = fopen_s(&fp, "Resource/dat/result_data.csv", "r");
 
 	//エラーチェック
 	if (result != 0)
@@ -98,7 +98,7 @@ void RankingInputScene::Draw() const
 	{
 		int x = cursor_x * font_size + 10;
 		int y = cursor_y * font_size + 295;
-		DrawBox(x, y, x + font_size, uy + font_size, GetColor(255, 255, 255),
+		DrawBox(x, y, x + font_size, y + font_size, GetColor(255, 255, 255),
 			FALSE);
 	}
 	else
@@ -173,7 +173,7 @@ bool RankingInputScene::InputName()
 		if (cursor_y < 4)
 		{
 			cursor_y++;
-			if (cursor_y = 4)
+			if (cursor_y == 4)
 			{
 				cursor_x = 0;
 			}
@@ -181,5 +181,40 @@ bool RankingInputScene::InputName()
 	}
 	
 	//カーソル位置の文字を決定する
-	if (InputControl::GetButtonDown)
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
+	{
+		if (cursor_y < 2)
+		{
+			name[name_num++] = 'a' + cursor_x + (cursor_y * 13);
+			if (name_num == 14)
+			{
+				cursor_x = 0;
+				cursor_y = 4;
+			}
+		}
+		else if (cursor_y < 4)
+		{
+			name[name_num++] = 'A' + cursor_x + ((cursor_y - 2) * 13);
+			if (name_num == 14)
+			{
+				cursor_x = 0;
+				cursor_y = 4;
+			}
+		}
+		else
+		{
+			if (cursor_x == 0)
+			{
+				name[name_num] = '\0';
+				return true;
+			}
+			else
+			{
+				name[name_num--] = NULL;
+			}
+		}
+	}
+
+	return false;
+
 }
