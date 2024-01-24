@@ -51,7 +51,7 @@ void RankingInputScene::Initialize()
 }
 
 //更新処理
-eSceneTyoe RankingInputScene::Update()
+eSceneType RankingInputScene::Update()
 {
 	bool is_change = false;
 
@@ -62,7 +62,7 @@ eSceneTyoe RankingInputScene::Update()
 	if (is_change)
 	{
 		//ランキング表示に遷移
-		return eSceneTyoe::E_RANKING_DISP;
+		return eSceneType::E_RANKING_DISP;
 	}
 	else
 	{
@@ -117,7 +117,7 @@ void RankingInputScene::Draw() const
 }
 
 //終了時処理
-void RankingInputScene::Initialize()
+void RankingInputScene::Finalize()
 {
 	//ランキングにデータを格納
 	ranking->SetRankingData(score, name);

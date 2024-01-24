@@ -23,7 +23,7 @@ public:
 	virtual void Initialize() {}
 
 	//XVˆ—
-	virtual eSceneTyoe Update()
+	virtual eSceneType Update()
 	{
 		return GetNowScene();
 	}

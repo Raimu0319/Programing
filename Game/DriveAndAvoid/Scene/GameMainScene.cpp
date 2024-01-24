@@ -61,7 +61,7 @@ void GameMainScene::Initialize()
 }
 
 //更新処理
-eSceneType GameMainScene::Updata()
+eSceneType GameMainScene::Update()
 {
 	//プレイヤーの更新
 	player->Update();
@@ -120,7 +120,7 @@ eSceneType GameMainScene::Updata()
 		return eSceneType::E_RESULT;
 	}
 
-	return GetNowScene;
+	return GetNowScene();
 }
 
 //描画処理
@@ -172,7 +172,7 @@ void GameMainScene::Draw() const
 	//燃料ゲージの描画
 	float fx = 510.0f;
 	float fy = 390.0f;
-	DrawFormatString(fx, fy, GetColor(0, 0, 0), "FUEL METER");
+	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "FUEL METER");
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetFuel() * 100 / 20000), fy +
 		40.0f, GetColor(0, 102, 204), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0),
@@ -248,7 +248,7 @@ void GameMainScene::Finalize()
 }
 
 //現在のシーン情報を取得
-eSceneTyoe GameMainScene::GetNowScene() const
+eSceneType GameMainScene::GetNowScene() const
 {
 	return eSceneType::E_MAIN;
 }
