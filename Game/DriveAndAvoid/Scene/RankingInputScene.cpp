@@ -145,11 +145,12 @@ bool RankingInputScene::InputName()
 		{
 			cursor_x--;
 		}
+		else
+		{
+			cursor_x = 12;
+		}
 	}
-	else
-	{
-		cursor_x = 12;
-	}
+	
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		if (cursor_x < 12)

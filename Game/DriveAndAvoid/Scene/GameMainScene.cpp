@@ -3,6 +3,17 @@
 #include "DxLib.h"
 #include <math.h>
 
+/*
+		//Ranking.csvbackup
+20000,1,--------------
+10000,2,--------------
+ 5000,3,--------------
+ 1000,4,--------------
+  500,5,--------------
+*/
+
+
+
 GameMainScene::GameMainScene() : high_score(0), back_ground(NULL),
 barrier_image(NULL),
 									mileage(0),player(nullptr),
@@ -67,15 +78,14 @@ eSceneType GameMainScene::Update()
 	player->Update();
 
 	//移動距離の更新
-	mileage += (int)player->GetSpeed
-	() + 5;
+	mileage += (int)player->GetSpeed() + 5;
 
 	//敵生成処理
 	if (mileage / 20 % 100 == 0)
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			if (enemy[i] = nullptr)
+			if (enemy[i] == nullptr)
 			{
 				int type = GetRand(3) % 3;
 				enemy[i] = new Enemy(type, enemy_image[type]);
@@ -146,14 +156,14 @@ void GameMainScene::Draw() const
 	DrawBox(500, 0, 640, 480, GetColor(0, 153, 0), TRUE);
 	SetFontSize(16);
 	DrawFormatString(510, 20, GetColor(0, 0, 0), "ハイスコア");
-	DrawFormatString(510, 40, GetColor(255, 255, 255), "%08d", high_score);
+	DrawFormatString(560, 40, GetColor(255, 255, 255), "%08d", high_score);
 	DrawFormatString(510, 80, GetColor(0, 0, 0), "避けた数");
 	for (int i = 0; i < 3; i++)
 	{
 		DrawRotaGraph(523 + (i * 50), 120, 0.3, 0, enemy_image[i], TRUE,
 			FALSE);
 
-		DrawFormatString(510, 200, GetColor(255, 255, 255), "%03d",
+		DrawFormatString(510 + (i * 50), 140, GetColor(255, 255, 255), "%03d",
 			enemy_count[i]);
 	}
 	DrawFormatString(510, 200, GetColor(0, 0, 0), "走行距離");
@@ -182,19 +192,11 @@ void GameMainScene::Draw() const
 	fx = 510.0f;
 	fy = 430.0f;
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
-	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetFuel() * 100 / 1000), fy +
-		40.0f,GetColor(0, 102, 204), TRUE);
+	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy +
+		40.0f,GetColor(255, 0, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100, fy + 40.0f,
 		GetColor(0, 0, 0), FALSE);
 
-	//体力ゲージの描画
-	fx = 510.0f;
-	fy = 430.0f;
-	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
-	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f,
-		GetColor(255, 0, 0), TRUE);
-	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0),
-		FALSE);
 }
 
 //終了時処理

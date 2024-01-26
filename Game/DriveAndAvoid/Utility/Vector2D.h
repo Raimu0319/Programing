@@ -79,7 +79,7 @@ public:
 		{
 			return Vector2D(0.0f);
 		}
-		if (location.y < 1e-6f);
+		if (location.y < 1e-6f)
 		{
 			return Vector2D(0.0f);
 		}
