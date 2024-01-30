@@ -215,7 +215,7 @@ void Player::Acceleration()
 	}
 
 	//RBƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚çA‰Á‘¬‚·‚é
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 10.0f || InputControl::GetRightTrigger())
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 10.0f)
 	{
 		speed += 1.0f;
 	}
